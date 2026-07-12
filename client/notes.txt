@@ -1,0 +1,27 @@
+Q) Explain createContext() inside AuthContext.jsx file inside 'context' folder
+
+Ans : 
+
+Imagine you are building a house (your website). Inside this house, you have three floors:
+
+    The Roof (Grandparent): Your Main App file.
+    The Living Room (Parent): Your Navigation Bar.
+    The Nightstand (Grandchild): A tiny User Profile button inside that navigation bar that needs to display the logged-in user's name.
+
+In standard React, data can only travel downwards, one floor at a time, passed like a physical package (called a Prop).
+If the Roof knows who is logged in, it has to throw the package down to the Living Room. Then, the Living Room has to hand it down to the Nightstand.
+This is called Prop Drilling. It becomes an absolute nightmare when your website grows because rooms that don't care about the user's data are forced to act as mail carriers.
+
+To fix this, React gives us a tool called Context. Context is like installing a central radio station in the building.
+Instead of passing physical packages down the stairs, the Roof just broadcasts the user's information over a radio frequency. Now, any room on any floor can just turn on a radio receiver and listen to the data instantly.
+
+Breaking Down: 'export const AuthContext = createContext()'
+
+1. createContext()
+This is a built-in React function. Writing this is like buying a brand new, empty radio frequency (let's say 98.1 FM)
+
+2. AuthContext
+This is the name you give to your new radio station slot. We call it AuthContext because its job is to listen to Authentication data (Who is logged in? What is their email?).
+
+3. export const
+This is like making the radio station public.

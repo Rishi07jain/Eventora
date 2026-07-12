@@ -1,0 +1,57 @@
+What each folder in the server folder does ?
+
+1) routes -- > The Map. 
+It defines the URLs (endpoints) the frontend can talk to.	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2) middleware --> The Gatekeeper. It checks requests before they reach the main logic (e.g., checking if a user is logged in).	
+
+This folder holds code that intercepts the request to do quick checks before the ticket is actually processed.
+
+    What it contains: authMiddleware.js and checkAvailability.js.
+
+    What it does for this app:
+
+        authMiddleware.js checks if the user is logged in. If they aren't, it blocks them right there.
+
+        checkAvailability.js checks the database to see if the concert is already sold out. If totalSeatsAvailable
+        is 0, it stops the process immediately and tells the frontend "Sorry, sold out!"
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3) controllers --> The Brain. It contains the actual logic of what happens when a request comes in.	
+
+This is where the actual heavy lifting and "business logic" lives. It coordinates everything.
+
+    What it contains: ticketController.js.
+
+    What it does for this app: Once the request passes the middleware, the controller takes over. It talks to the payment 
+    gateway (like Stripe) to charge the user's card. If the payment succeeds, it creates a new ticket in the database 
+    using the Ticket model and subtracts 1 from the event's totalSeatsAvailable.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4) models --> The Blueprint. It defines the structure of your data for the database.	
+
+This folder defines what your data must look like before it gets saved into MongoDB or SQL.
+
+    What it contains: Event.js, Ticket.js.
+
+    What it does for this app: * Event.js ensures that every event created has a title, date, venue, ticketPrice, and 
+    totalSeatsAvailable.
+
+        Ticket.js ensures a ticket has a userId, eventId, seatNumber, and a paymentStatus.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5) utils (Utilities) --> The Toolbox. Reusable helper functions that get used across the app.	
+
+This folder holds independent, reusable helper functions that don't belong to any specific route or controller but are needed to finish tasks.
+
+    What it contains: generateQRCode.js and sendEmail.js.
+
+    What it does for this app: * generateQRCode.js takes the ticket ID and turns it into a scannable QR code 
+    image (for the ticket checker at the venue door).
+
+        sendEmail.js takes that QR code and emails it to the user as a PDF receipt.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
