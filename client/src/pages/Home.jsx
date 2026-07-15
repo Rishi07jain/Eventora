@@ -93,8 +93,8 @@ const Home = () => {
                     {events.map(event => (
                         <div key={event._id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition flex flex-col">
                             <div className="h-48 bg-gray-200 overflow-hidden relative">
-                                {event.image ? (
-                                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                                {event.imageUrl ? (
+                                    <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-600 font-bold text-2xl">
                                         {event.category || 'Event'}
