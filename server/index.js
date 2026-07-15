@@ -37,7 +37,7 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log("Error connecting to MongoDB :" , error)
 })
 
-const port = process.env.port || 8080;  // this is to initialise the 'port' , if we have stored port value in .env file
+const port = process.env.PORT || 8080;  // this is to initialise the 'port' , if we have stored port value in .env file
 
 app.listen(port , ()=>{
     console.log(`Server is now running on port ${port} `)

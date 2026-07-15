@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api',   // baseURL: Sets up your backend base server address. Because this is locked in here, when you write code later to fetch events, you don't have to type http://localhost:8080/api/events. You can simply write api.get('/events'), and Axios will stitch the URLs together automatically.
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api',  // baseURL: Sets up your backend base server address. Because this is locked in here, when you write code later to fetch events, you don't have to type http://localhost:8080/api/events. You can simply write api.get('/events'), and Axios will stitch the URLs together automatically.
     headers:{
         'Content-Type': 'application/json'  // in backend , we used express.json() , ie backend will handle everything in json format. So this line is frontend's way of saying we will send everything in json format. you are telling the backend server: "Hey, the data inside this request is formatted in JSON language." When the server reads this label, it immediately knows to hand the package over to your express.json() middleware, which unlocks it and reads it perfectly. Without this label, the backend wouldn't know how to open or read the incoming data.
     },
